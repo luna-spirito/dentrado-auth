@@ -1,0 +1,23 @@
+[package]
+name = "auth"
+version = "0.2.0"
+edition = "2024"
+license = "AGPL-3.0-only"
+description = "Dentrado identity service: WebAuthn login, session certs, enroll codes, attestations"
+
+# Supply-chain policy: pure Rust, no C — the SINGLE exception is ring
+# as the rustls crypto provider (the same pairing as kolorinko; TLS
+# is terminated in-process so that no reverse proxy stands in front
+# of the IS). Direct deps: ed25519-dalek, sha2, hmac, getrandom, redb,
+# p256 (WebAuthn ES256, RustCrypto) + rustls/rustls-pki-types.
+[dependencies]
+ed25519-dalek = "2.1"
+sha2 = "0.10"
+hmac = "0.12"
+getrandom = "0.2"
+redb = "2"
+p256 = { version = "0.14.0", default-features = false, features = ["ecdsa", "std"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
+# PEM parsing for --tls-cert/--tls-key: rustls-pemfile is archived
+# (RUSTSEC-2025-0134) — the PemObject API lives in pki-types since 1.9
+rustls-pki-types = { version = "1.15", default-features = false, features = ["std"] }

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Dentrado</title>
+  <link rel="icon" href="/logo.svg" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f2" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0d0c" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main id="app">
+    <div class="loading-block"><span class="spin"></span> Loading…</div>
+  </main>
+
+  <div id="account-menu" class="account-menu" hidden></div>
+
+  <div id="toast" role="status" aria-live="polite">
+    <span class="t-icon"></span><span class="t-msg"></span>
+  </div>
+  <div id="modal-root"></div>
+
+  <noscript>
+    <p style="text-align:center; margin:2rem; color:var(--muted)">
+      This identity service is a WebAuthn application — it needs JavaScript.
+    </p>
+  </noscript>
+
+  <script src="/app.js" defer></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      addEventListener("load", () => navigator.serviceWorker.register("/sw.js"));
+    }
+  </script>
+</body>
+</html>

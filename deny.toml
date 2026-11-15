@@ -1,0 +1,33 @@
+# cargo-deny (run by the pre-commit hook, and must run in CI).
+#
+# Policy: no Unknown code. Advisories and yanked versions are deny;
+# licenses are an explicit allow-list for our tree (RustCrypto/dalek + redb).
+
+[graph]
+all-features = true
+
+[advisories]
+version = 2
+yanked = "deny"
+
+[licenses]
+version = 2
+allow = [
+    "AGPL-3.0-only",
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "ISC", # ring/untrusted — the single C exception (the rustls provider)
+    "BSD-1-Clause",
+    "BSD-3-Clause",
+    "Unicode-3.0",
+]
+confidence-threshold = 0.93
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

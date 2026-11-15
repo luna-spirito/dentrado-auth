@@ -1,0 +1,3 @@
+- Strive to purely functional semantics.
+- Use English comment/docs.
+- Use compositional style and layered ordering. All modules should form acyclic graph.
