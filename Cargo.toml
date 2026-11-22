@@ -2,7 +2,7 @@
 name = "auth"
 version = "0.2.0"
 edition = "2024"
-license = "AGPL-3.0-only"
+license = "AGPL-3.0-or-later"
 description = "Dentrado identity service: WebAuthn login, session certs, enroll codes, attestations"
 
 # Supply-chain policy: pure Rust, no C — the SINGLE exception is ring
