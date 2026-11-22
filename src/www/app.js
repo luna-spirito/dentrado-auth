@@ -898,6 +898,7 @@ async function viewAuthorize(params) {
         "without a path, query, fragment, userinfo or default port",
     );
   const aud = audUrl.origin;
+  const audDisplay = aud.startsWith("https://") ? aud.substring(8) : aud;
 
   // The RP never picks the landing page. A caller-supplied callback is
   // accepted only when it is exactly the derived well-known endpoint;
@@ -909,19 +910,15 @@ async function viewAuthorize(params) {
         "a custom path could be user content that forwards the token",
     );
 
+  // TODO: `cancel` kinda barely makes any sense right now.
+
   render(`
     <div class="auth">
       <div class="auth-card">
         <span class="eyebrow">Sign-in request</span>
-        <h1>Authorize ${esc(aud)}?</h1>
-        <p class="lead"><code>${esc(aud)}</code> asks for a one-time confirmation of
+        <h1>Authorize ${esc(audDisplay)}?</h1>
+        <p class="lead"><code>${esc(audDisplay)}</code> asks for a one-time confirmation of
         your Dentrado identity.</p>
-        <div class="note">
-          The attestation is bound to <code>${esc(aud)}</code> and is
-          delivered only to its reserved
-          <code>${esc(CALLBACK_PATH)}</code> endpoint — no passwords and
-          no keys.
-        </div>
         <div class="row auth-actions">
           <button id="deny" class="btn btn-ghost">Cancel</button>
           <button id="allow" class="btn btn-primary">${I("check")} Allow</button>
